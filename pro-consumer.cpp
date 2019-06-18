@@ -138,17 +138,16 @@ void generateRandomArray(int rangeL, int rangeR) {
     for (int i = 0; i < total_data; i++)
     {
         produce_buffer[i] = rand() % (rangeR - rangeL + 1) + rangeL;
-
 	}
 }
 
 void make_producters(int num,  vector<thread> & productor_vector){
 
 	//准备测试数据源
-	
-    generateRandomArray(1,1000);	
+	generateRandomArray(1,1000);	
 
-	for(int i = 0; i < num; i++){
+	for(int i = 0; i < num; i++)
+	{
 		productor_vector.push_back(std::thread(Producer_thread));// 创建生产者线程.
 	}
 
@@ -156,10 +155,10 @@ void make_producters(int num,  vector<thread> & productor_vector){
 
 void make_consumers(int num, vector<thread> & consumer_vector){
 
-    for(int i = 0; i < num; i++){
-
-	        consumer_vector.push_back(std::thread(Consumer_thread));// 创建生产者线程.
-	    }
+    for(int i = 0; i < num; i++)
+	{
+		consumer_vector.push_back(std::thread(Consumer_thread));// 创建生产者线程.
+	}
 
 }
 
