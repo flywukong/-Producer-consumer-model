@@ -82,9 +82,10 @@ void Producer_thread()
 		std::unique_lock<std::mutex> lock(producer_mutex);
 		if (produced_item_counter < total_data)
 		{
-			++produced_item_counter;
+			cout<<"produced_item_counter"<<produced_item_counter<<endl;
 			produce_item(produced_item_counter);
 			std::cout << "productor thread  finish the " <<  produced_item_counter << "th item : " << produce_buffer[produced_item_counter]<< std::endl;
+			++produced_item_counter;
 		}
 		else
 		{
@@ -141,10 +142,42 @@ void generateRandomArray(int rangeL, int rangeR) {
 	}
 }
 
+char *rand_str(char *str,int len)
+{
+    int i;
+    for(i=0;i<len;++i)
+        str[i]='A'+rand()%26;
+    str[++i]='\0';
+    return str;
+}
+
+/*
+void generateRandomString(int len) {
+
+    srand(time(NULL)); // 随机种子
+
+	char *name = new char[len+1];
+
+    for (int i = 0; i < total_data; i++)
+	{
+	
+		string t = rand_str(name, len);
+		produce_buffer[i] = t;
+    }
+
+	delete []name;
+}
+
+*/
+
 void make_producters(int num,  vector<thread> & productor_vector){
 
-	//准备测试数据源
+	//准备测试数据源, 整形buffer
 	generateRandomArray(1,1000);	
+
+    //准备测试数据源,String buffer
+	
+	//generateRandomString(5);
 
 	for(int i = 0; i < num; i++)
 	{

@@ -30,8 +30,9 @@ total 28
 -rw-r--r-- 1 wuchen wuchen 1211 Jun 18 16:07 README.md
 
 ```
-intBuffer_test.cpp 为整形buffer的测试文件，pro-consumer.cpp实现了核心生产消费者线程模型，pro-consumer.h 定义了全局变量
+intBuffer_test.cpp 为整形buffer的测试文件， StringBuffer_test.cpp为String buffer的测试文件 pro-consumer.cpp实现了核心生产消费者线程模型，pro-consumer.h 定义了全局变量
 
+CMakeLists-String.txt为编译String类型的数据缓存测试，测试String时将其名称修改为CMakeLists.txt
 
 ###  编译执行
 
@@ -46,8 +47,14 @@ make
 ```
 可执行程序IntBufferTest  后面跟的两个参数分别是生产者的数目 和消费者的数目 ,  如果要修改buffer缓冲区大小 可以在pro-consumer.h 修改buffer_size 长度
 
-如果要修改不同的buffer 缓冲区类型，需要修改pro-consumer.h定义的Array 泛型类型，并且在pro-consumer.cpp中修改generateRandomArray实现，该函数实现了某种数据类型的数据源生产功能。
+如果要修改不同的buffer 缓冲区类型，需要修改pro-consumer.h定义的Array 泛型类型，
 
+```
+static Array<std::string, buffer_size> data_buffer; //循环队列
+static Array<std::string , total_data> produce_buffer; //生产者数据源队列
 
+```
+并且在pro-consumer.cpp中修改generateRandomArray实现，该函数实现了某种数据类型的数据源生产功能。
 
+将其注释掉，换成实现的generateRandomString(5)就是产生String数据源的函数
 
