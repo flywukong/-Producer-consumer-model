@@ -5,19 +5,19 @@
 void test_intbuffer(int m , int n )
 
 {
-	 std::vector<std::thread> thread_vector1;
-	 std::vector<std::thread> thread_vector2;
+	 std::vector<std::thread> thread_produce;
+	 std::vector<std::thread> thread_consume;
 
 
-	 make_producters(m,thread_vector1);
-	 make_consumers(n,thread_vector2);
+	 make_producters(m,thread_produce);
+	 make_consumers(n,thread_consume);
 
-	 for (auto &thr1 : thread_vector1)
+	 for (auto &thr1 : thread_produce)
 	 {
 		thr1.join();
 	 }
 
-	 for(auto &thr2 : thread_vector2)
+	 for(auto &thr2 : thread_consume)
 	 {
 		thr2.join();
 	 
@@ -25,9 +25,6 @@ void test_intbuffer(int m , int n )
 }
 
 int main(int argc, char* argv[]) { 
-
-
-    	
 
 	if (argc != 3)
 	{	
@@ -39,8 +36,8 @@ int main(int argc, char* argv[]) {
 	//消费者个数
     int consumer_num  = atoi(argv[2]);
 
-    test_intbuffer( producer_num,consumer_num);
 
+    test_intbuffer(producer_num,consumer_num);
 	return 0;
    
 }

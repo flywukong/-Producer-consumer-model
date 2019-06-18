@@ -49,7 +49,6 @@ void produce_item(int i)
 void  consume_item()
 
 {
-	bool flag = false;
 	std::unique_lock<std::mutex> lck(mtx);
 	// item buffer is empty, just wait here.
 	while (write_offset == read_offset)
@@ -59,6 +58,7 @@ void  consume_item()
 	}
 
 	auto data = data_buffer[read_offset];//读取数据 这里消费者可以选择对data进行 数据处理
+
 
 	read_offset++;
 
@@ -70,7 +70,6 @@ void  consume_item()
 	buffer_nofull.notify_all();//通知缓冲区不满
 	lck.unlock();
 
-	//return flag;
 
 }
 
@@ -112,7 +111,7 @@ void Consumer_thread()
 		std::unique_lock<std::mutex> lck(consumer_mutex);
 		if (consumed_item_counter < total_data)
 		{
-		consume_item();
+			consume_item();
 			
 			++consumed_item_counter;
 			std::cout << "consumer finish numer: " << consumed_item_counter << std::endl;
@@ -147,7 +146,7 @@ void make_producters(int num,  vector<thread> & productor_vector){
 
 	//准备测试数据源
 	
-      generateRandomArray(1,1000);	
+    generateRandomArray(1,1000);	
 
 	for(int i = 0; i < num; i++){
 		productor_vector.push_back(std::thread(Producer_thread));// 创建生产者线程.

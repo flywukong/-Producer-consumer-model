@@ -2,14 +2,14 @@ template < typename T, int N >
 class Array
 {
 	private:
-    T m_array[N];
+		T m_array[N];
 	public:
-    int length();
-    bool set(int index, T value);
-    bool get(int index, T& value);
-    T& operator[] (int index);
-    T operator[] (int index) const;
-    virtual ~Array();                 // Array 类可能被继承，析构函数声明为虚函数
+		int length();
+		bool set(int index, T value);
+		bool get(int index, T& value);
+		T& operator[] (int index);
+		T operator[] (int index) const;
+		virtual ~Array();                 
 };
 
 template < typename T, int N >
